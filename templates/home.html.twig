@@ -12,13 +12,16 @@
     <div class="container text-center">
         <div class="jumbotron">
             <h1 class="display-4 u-uppercase">GTM Doc</h1>
-            <p class="lead">With GTM Doc you can view all your Google Tag Manager Tags in one page. Use the note section of each tag to put down a description and a title. With the generated overview, non-techies will know which tags are implemented right now.</p>
+            <p class="lead mt-4">GTM Doc is a utility created for Google's Tag Manager.<br>This tool is designed, created, tested, managed, and owned by Nick Böcker.</p>
+            <p class="lead mt-4">With GTM Doc you can view all your Google Tag Manager Tags in one page. Use the note section of each tag to put down a description and a title. With the generated overview, non-techies will know which tags are implemented right now.</p>
             <p class="lead"><a href="{{ path('app.note_section_explanation') }}">➞ Learn how to fill the note section properly</a></p>
+
+            <p class="mt-4">Please take the time to read the <a href="{{ path('app.data_privacy') }}">Privacy Policy and Terms of Service</a>.<br>Don't forget to take a look at the <a href="https://github.com/NickHatBoecker/GTM-Doc">GitHub Repository</a> if you run into problems.</p>
 
             {% if not isAuthenticated %}
                 <hr class="my-4">
-                <p>In order to view your GTM Tags, login via your google account and choose your GTM account.</p>
-                <a class="btn btn-primary btn-lg u-uppercase mt-2" href="{{ path('connect_google_start') }}" role="button">Login via Google</a>
+                <p>Once you click <strong>Proceed</strong>, you will be asked to authorize GTM Doc to use your Google Tag Manager data.</p>
+                <a class="btn btn-primary btn-lg u-uppercase mt-2" href="{{ path('connect_google_start') }}" role="button">Proceed</a>
             {% endif %}
         </div>
     </div>
