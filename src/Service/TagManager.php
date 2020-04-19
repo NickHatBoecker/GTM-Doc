@@ -3,6 +3,8 @@
 namespace App\Service;
 
 
+use App\Model\Account;
+use App\Model\Container;
 use App\Model\Tag;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -34,9 +36,12 @@ class TagManager
     }
 
     /**
+     * @param string $currentAccountId
+     * @param string $currentContainerId
+     *
      * @return array
      */
-    public function getAccounts()
+    public function getAccounts(string $currentAccountId = '', string $currentContainerId = '')
     {
         if (!$this->tagManager) {
             return [];
@@ -47,10 +52,12 @@ class TagManager
             $accounts = [];
             foreach ($accountData as $account) {
                 /** @var \Google_Service_TagManager_Account $account */
-                $accounts[] = [
-                    'id' => $account->getAccountId(),
-                    'name' => $account->getName(),
-                ];
+                $accounts[] = new Account(
+                    $account->getAccountId(),
+                    $account->getName(),
+                    $account->getAccountId() === $currentAccountId,
+                    $this->getContainers($account->getAccountId(), $currentContainerId)
+                );
             }
 
             return $accounts;
@@ -61,10 +68,11 @@ class TagManager
 
     /**
      * @param string $accountId
+     * @param string $currentContainerId
      *
      * @return array
      */
-    public function getContainers(string $accountId)
+    public function getContainers(string $accountId, string $currentContainerId)
     {
         if (!$this->tagManager) {
             return [];
@@ -76,10 +84,11 @@ class TagManager
             $containers = [];
             foreach ($containerData as $container) {
                 /** @var \Google_Service_TagManager_Container $container */
-                $containers[] = [
-                    'id' => $container->getContainerId(),
-                    'name' => $container->getName(),
-                ];
+                $containers[] = new Container(
+                    $container->getContainerId(),
+                    $container->getName(),
+                    $container->getContainerId() == $currentContainerId
+                );
             }
 
             return $containers;
@@ -124,5 +133,33 @@ class TagManager
         } catch (\Exception $e) {
             return [];
         }
+    }
+
+    /**
+     * @param array $accounts
+     *
+     * @return array
+     */
+    public function getBreadcrumb(array $accounts)
+    {
+        $breadcrumb = [];
+
+        foreach ($accounts as $account) {
+            if (!$account->selected) {
+                continue;
+            }
+
+            $breadcrumb[] = $account->name;
+
+            foreach ($account->containers as $container) {
+                if (!$container->selected) {
+                    continue;
+                }
+
+                $breadcrumb[] = $container->name;
+            }
+        }
+
+        return $breadcrumb;
     }
 }

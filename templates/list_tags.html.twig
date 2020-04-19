@@ -2,6 +2,12 @@
 
 {% block body %}
     <div role="tablist" class="container">
+        {% if breadcrumb|length == 2 %}
+            <div class="alert bg-primary text-white mb-5">
+                <a href="{{ path('app.home') }}" class="text-white">Home</a> ➤ {{ breadcrumb[0] }} ➤ {{ breadcrumb[1] }}
+            </div>
+        {% endif %}
+
         {% for tag in tags %}
             <div class="card mb-5 u-borderless">
                 <div class="card-header font-weight-bold bg-primary text-white">

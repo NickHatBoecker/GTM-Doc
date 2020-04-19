@@ -14,7 +14,10 @@
                     </a>
                     <div class="dropdown-menu bg-primary" aria-labelledby="navbarDropdown">
                         {% for account in accounts %}
-                            <a class="dropdown-item text-white{% if accountId|default("") == account.id %} active{% endif %}" href="{{ path('app.list_containers', { accountId: account.id }) }}">{{ account.name }}</a>
+                            <span class="dropdown-item text-white">{{ account.name }}</span>
+                            {% for container in account.containers %}
+                                <a class="dropdown-item text-white pl-5{% if container.selected %} active{% endif %}" href="{{ path('app.list_tags', { accountId: account.id, containerId: container.id }) }}">➤ {{ container.name }}</a>
+                            {% endfor %}
                         {% endfor %}
                     </div>
                 </li>

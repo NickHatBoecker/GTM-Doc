@@ -19,11 +19,14 @@ class ListTagsController extends Controller
      */
     public function index(string $accountId, string $containerId, TagManager $tagManager)
     {
+        $accounts = $tagManager->getAccounts($accountId, $containerId);
+
         return $this->render('list_tags.html.twig', [
-            'accounts' => $tagManager->getAccounts(),
+            'accounts' => $accounts,
             'accountId' => $accountId,
             'containerId' => $containerId,
             'tags' => $tagManager->getTags($accountId, $containerId),
+            'breadcrumb' => $tagManager->getBreadcrumb($accounts),
         ]);
     }
 }
