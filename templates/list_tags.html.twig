@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div role="tablist" class="container">
+        {% for tag in tags %}
+            <div class="card mb-5 u-borderless">
+                <div class="card-header font-weight-bold bg-primary text-white">
+                    {{ tag.name }}
+                </div>
+                <div class="card-body">
+                    <p class="mb-4 font-italic">{{ tag.description|default('No description available.')|trim|nl2br }}</p>
+
+                    {% if tag.type == constant('App\\Model\\Tag::TYPE_EVENT') %}
+                        <table class="table table-striped table-bordered table-sm">
+                            <tbody>
+                            <tr>
+                                <th class="w-25">Eventcategory:</th>
+                                <td>{{ tag.eventCategory }}</td>
+                            </tr>
+                            <tr>
+                                <th class="w-25">Eventaction:</th>
+                                <td>{{ tag.eventAction }}</td>
+                            </tr>
+                            <tr>
+                                <th class="w-25">Eventlabel:</th>
+                                <td>{{ tag.eventLabel }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    {% endif %}
+                </div>
+                {% if tag.name != tag.originalName %}
+                    <div class="card-footer text-muted font-italic">
+                        {{ tag.originalName }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock body %}

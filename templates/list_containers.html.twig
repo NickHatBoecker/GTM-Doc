@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container bg-white p-4">
+    <p>Choose a container to view its tags.</p>
+
+    {% for container in containers %}
+        <a href="{{ path('app.list_tags', { accountId: accountId, containerId: container.id }) }}">{{ container.name }}</a>
+    {% endfor %}
+</div>
+{% endblock body %}

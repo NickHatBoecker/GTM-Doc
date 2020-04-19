@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GTM Doc{% endblock %}
+
+{% block alerts %}
+    {% if isAuthenticated %}
+        <div class="alert alert-warning">Choose an account in the navbar in order to view your GTM tags.</div>
+    {% endif %}
+{% endblock alerts %}
+
+{% block body %}
+    <div class="container text-center">
+        <div class="jumbotron">
+            <h1 class="display-4 u-uppercase">GTM Doc</h1>
+            <p class="lead">With GTM Doc you can view all your Google Tag Manager Tags in one page. Use the note section of each tag to put down a description and a title. With the generated overview, non-techies will know which tags are implemented right now.</p>
+            <p class="lead"><a href="{{ path('app.note_section_explanation') }}">➞ Learn how to fill the note section properly</a></p>
+
+            {% if not isAuthenticated %}
+                <hr class="my-4">
+                <p>In order to view your GTM Tags, login via your google account and choose your GTM account.</p>
+                <a class="btn btn-primary btn-lg u-uppercase mt-2" href="{{ path('connect_google_start') }}" role="button">Login via Google</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
