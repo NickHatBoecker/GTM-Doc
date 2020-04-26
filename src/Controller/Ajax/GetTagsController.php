@@ -26,11 +26,27 @@ class GetTagsController extends Controller
             $accountId = $request->get('accountId', '');
             $containerId = $request->get('containerId', '');
 
-            return new JsonResponse($tagManager->getTags($accountId, $containerId));
+            $response = new JsonResponse($tagManager->getTags($accountId, $containerId));
+            $this->trackRequest();
+
+            return $response;
         } catch (\Exception $e) {
             return new JsonResponse([
                 'message' => $e->getMessage()
             ]);
         }
+    }
+
+    private function trackRequest()
+    {
+        $filepath = sprintf("%s/var/tracker.php", $this->getParameter('kernel.project_dir'));
+        if (!is_file($filepath)) {
+            return;
+        }
+
+        $currentSum = (int) file_get_contents($filepath);
+        $currentSum += 1;
+
+        file_put_contents($filepath, $currentSum);
     }
 }
