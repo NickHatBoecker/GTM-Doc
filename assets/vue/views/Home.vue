@@ -10,7 +10,7 @@
                     <p class="mt-4">With GTM Doc you can view all your Google Tag Manager Tags in one page. Use the note section of each tag to put down a description and a title. With the generated overview, non-techies will know which tags are implemented right now.</p>
                     <p><router-link to="/note-section-explanation">➞ Learn how to fill the note section properly</router-link></p>
 
-                    <img src="/img/screenshot.jpg" alt="Screenshot of GTM Doc" title="" width="80%" height="auto" />
+                    <img src="/img/screenshot.webp" alt="Screenshot of GTM Doc" title="" width="80%" height="auto" />
 
                     <p class="mt-4 meta">
                         Please take the time to read the <router-link to="/data-privacy">Privacy Policy and Terms of Service</router-link>.<br>
