@@ -15,6 +15,11 @@ class Tag
     public $originalName;
 
     /** @var string */
+    public $name;
+    /** @var string */
+    public $description;
+
+    /** @var string */
     public $eventCategory;
     /** @var string */
     public $eventAction;
@@ -25,6 +30,8 @@ class Tag
     {
         $this->originalName = $tagData->getName();
         $this->note = $tagData->getNotes();
+        $this->name = $this->generateName();
+        $this->description = $this->generateDescription();
 
         foreach ($tagData->getParameter() as $parameter) {
             /** @var \Google_Service_TagManager_Parameter $parameter */
@@ -50,7 +57,7 @@ class Tag
     /**
      * @return string
      */
-    public function getName()
+    public function generateName()
     {
         if (!$this->note) {
             return $this->originalName;
@@ -71,7 +78,7 @@ class Tag
     /**
      * @return string
      */
-    public function getDescription()
+    public function generateDescription()
     {
         if (!$this->note) {
             return '';
@@ -79,12 +86,17 @@ class Tag
 
         $noteParts = explode("\n", $this->note);
         if (count($noteParts) < 2) {
-            return $this->note;
+            $note = $this->note;
+        } else {
+            // Remove title
+            unset($noteParts[0]);
+
+            $note = implode("\n", $noteParts);
         }
 
-        // Remove title
-        unset($noteParts[0]);
+        $note = trim($note);
+        $note = nl2br($note);
 
-        return implode("\n", $noteParts);
+        return $note;
     }
 }

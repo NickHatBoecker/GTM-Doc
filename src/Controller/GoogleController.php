@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class GoogleController extends Controller
 {
     /**
-     * @Route("/connect/google", name="connect_google_start", methods={"GET"})
+     * @Route("/api/connect/google", name="connect_google_start", methods={"GET"})
      *
      * @param ClientRegistry $clientRegistry
      *
@@ -31,7 +31,7 @@ class GoogleController extends Controller
     }
 
     /**
-     * @Route("/connect/google/check", name="connect_google_check", methods={"GET"})
+     * @Route("/api/connect/google/check", name="connect_google_check", methods={"GET"})
      *
      * @param Request $request
      * @param ClientRegistry $clientRegistry
@@ -42,24 +42,10 @@ class GoogleController extends Controller
             $client = $clientRegistry->getClient('google');
             $accessToken = $client->getAccessToken()->getToken();
 
-            $session->set('access_token', $accessToken);
+            return $this->redirectToRoute('app.home', [ 'accessToken' => $accessToken ]);
         } catch (\Exception $e) {
             // @TODO Do nothing yet
         }
-
-        return $this->redirectToRoute('app.home');
-    }
-
-    /**
-     * @Route("/connect/google/revoke", name="connect_google_revoke", methods={"GET"})
-     *
-     * @param SessionInterface $session
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function revokeAccessAction(SessionInterface $session)
-    {
-        $session->remove('access_token');
 
         return $this->redirectToRoute('app.home');
     }

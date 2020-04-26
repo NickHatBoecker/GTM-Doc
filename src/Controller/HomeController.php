@@ -11,11 +11,19 @@ class HomeController extends Controller
 {
     /**
      * @Route("/", name="app.home", methods={"GET"})
+     * @Route("/{vueRouting}", name="app.vue.home", methods={"GET"}, requirements={"vueRouting"="^(?!api|_(profiler|wdt)).*"})
      */
     public function homeAction(SessionInterface $session, TagManager $tagManager)
     {
-        return $this->render('home.html.twig', [
-            'accounts' => $tagManager->getAccounts(),
+        $accounts = [];
+        try {
+            $accounts = $tagManager->getAccounts();
+        } catch (\Exception $e) {
+            // Do nothiing
+        }
+
+        return $this->render('base.html.twig', [
+            'accounts' => $accounts,
         ]);
     }
 }

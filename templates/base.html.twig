@@ -1,77 +1,39 @@
-{% set isAuthenticated = app.session.get('access_token') %}
-
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="description" content="GTM Documentation for non-devs ● Define custom titles &amp; descriptions ● Just log in via Google &amp; choose your container ● GTM Doc"/>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <meta property="og:locale" content="en_EN" />
-        <meta property="og:type" content="article" />
-        <meta property="og:title" content="GTM Doc - Easy documentation for Google's Tag Manager" />
-        <meta property="og:description" content="GTM Documentation for non-devs ● Define custom titles &amp; descriptions ● Just log in via Google &amp; choose your container ● GTM Doc" />
-        <meta property="og:url" content="https://gtm.nick-hat-boecker.de/" />
-        <meta property="og:site_name" content="Nick hat Böcker" />
-        <meta property="og:image" content="https://nick-hat-boecker.de/wp-content/uploads/2020/04/Screenshot_2020-04-19-17.39.22_QnkKDy-1024x603.jpg" />
-        <meta property="og:image:secure_url" content="https://nick-hat-boecker.de/wp-content/uploads/2020/04/Screenshot_2020-04-19-17.39.22_QnkKDy-1024x603.jpg" />
-        <meta property="og:image:width" content="1024" />
-        <meta property="og:image:height" content="603" />
+    <meta name="keywords" content="gtm doc, google tag manager, documentation, analytics, google login">
+    <meta name="description" content="GTM Documentation for non-devs ● Define custom titles &amp; descriptions ● Just log in via Google &amp; choose your container ● GTM Doc"/>
+    <meta name="author" content="Nick Böcker">
 
-        <title>{% block title %}GTM Doc{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+    <meta property="og:locale" content="en_EN" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="GTM Doc - Easy documentation for Google's Tag Manager" />
+    <meta property="og:description" content="GTM Documentation for non-devs ● Define custom titles &amp; descriptions ● Just log in via Google &amp; choose your container ● GTM Doc" />
+    <meta property="og:url" content="https://gtm.nick-hat-boecker.de/" />
+    <meta property="og:site_name" content="Nick hat Böcker" />
+    <meta property="og:image" content="https://nick-hat-boecker.de/wp-content/uploads/2020/04/Screenshot_2020-04-19-17.39.22_QnkKDy-1024x603.jpg" />
+    <meta property="og:image:secure_url" content="https://nick-hat-boecker.de/wp-content/uploads/2020/04/Screenshot_2020-04-19-17.39.22_QnkKDy-1024x603.jpg" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="603" />
 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>GTM Doc</title>
 
-        <style>
-            body > .container {
-                min-height: 200px;
-            }
+    <link rel="icon" href="https://nick-hat-boecker.de/wp-content/themes/nhb-2015/img/favicon.png" sizes="64x64" />
 
-            .navbar .dropdown-item.active,
-            .navbar .dropdown-item:active,
-            .navbar .dropdown-item:focus,
-            .navbar .dropdown-item:hover {
-                background-color: #005fc5;
-            }
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    {{ encore_entry_link_tags('app') }}
+</head>
+<body class="bg-dark">
+    <div id="app"></div>
 
-            .navbar span.dropdown-item.active,
-            .navbar span.dropdown-item:active,
-            .navbar span.dropdown-item:focus,
-            .navbar span.dropdown-item:hover {
-                background-color: transparent;
-            }
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-            .fas {
-                font-family: 'FontAwesome', serif;
-            }
-
-            .u-uppercase {
-                text-transform: uppercase;
-            }
-
-            .u-borderless {
-                border: 0 !important;
-            }
-
-            .alert {
-                border-radius: 0 !important;
-            }
-        </style>
-    </head>
-    <body class="bg-dark">
-        {% include 'header.html.twig' %}
-
-        {% block alerts %}{% endblock alerts %}
-
-        <div class="pt-5">
-            {% block body %}{% endblock %}
-        </div>
-
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-        {% block javascripts %}{% endblock %}
-    </body>
+    {{ encore_entry_script_tags('app') }}
+</body>
 </html>

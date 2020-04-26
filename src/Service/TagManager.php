@@ -6,33 +6,35 @@ namespace App\Service;
 use App\Model\Account;
 use App\Model\Container;
 use App\Model\Tag;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class TagManager
 {
-    /** @var \Google_Service_TagManager */
-    private $tagManager;
+    /** @var Request */
+    private $request;
 
     /**
      * TagManager constructor.
      *
-     * @param SessionInterface $session
+     * @param RequestStack $requestStack
      */
-    public function __construct(SessionInterface $session)
+    public function __construct(RequestStack $requestStack)
     {
-        $accessToken = $session->get('access_token');
-        if (!$accessToken) {
-            return;
-        }
+        $this->request = $requestStack->getCurrentRequest();
+    }
 
-        try {
-            $client = new \Google_Client();
-            $client->setAccessToken($accessToken);
+    /**
+     * @return \Google_Service_TagManager
+     */
+    public function getClient()
+    {
+        $client = new \Google_Client();
+        $client->setAccessToken($this->getAccessToken());
 
-            $this->tagManager = new \Google_Service_TagManager($client);
-        } catch (\Exception $e) {
-            // Do nothing
-        }
+        return new \Google_Service_TagManager($client);
     }
 
     /**
@@ -43,12 +45,10 @@ class TagManager
      */
     public function getAccounts(string $currentAccountId = '', string $currentContainerId = '')
     {
-        if (!$this->tagManager) {
-            return [];
-        }
+        $client = $this->getClient();
 
         try {
-            $accountData = $this->tagManager->accounts->listAccounts()->getAccount();
+            $accountData = $client->accounts->listAccounts()->getAccount();
             $accounts = [];
             foreach ($accountData as $account) {
                 /** @var \Google_Service_TagManager_Account $account */
@@ -61,7 +61,12 @@ class TagManager
             }
 
             return $accounts;
-        } catch (\Exception $e) {
+        } catch (\Google_Service_Exception $e) {
+            $error = $e->getErrors()[0];
+            if ($error['reason'] === 'authError') {
+                throw new UnauthorizedHttpException('You\'re not authorized.');
+            }
+
             return [];
         }
     }
@@ -74,13 +79,11 @@ class TagManager
      */
     public function getContainers(string $accountId, string $currentContainerId)
     {
-        if (!$this->tagManager) {
-            return [];
-        }
+        $client = $this->getClient();
 
         try {
             $path = sprintf("accounts/%s", $accountId);
-            $containerData = $this->tagManager->accounts_containers->listAccountsContainers($path)->getContainer();
+            $containerData = $client->accounts_containers->listAccountsContainers($path)->getContainer();
             $containers = [];
             foreach ($containerData as $container) {
                 /** @var \Google_Service_TagManager_Container $container */
@@ -105,13 +108,11 @@ class TagManager
      */
     public function getTags(string $accountId, string $containerId)
     {
-        if (!$this->tagManager) {
-            return [];
-        }
+        $client = $this->getClient();
 
         try {
             $workspacePath = sprintf("accounts/%s/containers/%s", $accountId, $containerId);
-            $workspaceData = $this->tagManager->accounts_containers_workspaces
+            $workspaceData = $client->accounts_containers_workspaces
                 ->listAccountsContainersWorkspaces($workspacePath)
                 ->getWorkspace();
 
@@ -120,7 +121,7 @@ class TagManager
 
             $tagPath = sprintf("%s/workspaces/%s", $workspacePath, $workspace->getWorkspaceId());
 
-            $tagsData = $this->tagManager->accounts_containers_workspaces_tags
+            $tagsData = $client->accounts_containers_workspaces_tags
                 ->listAccountsContainersWorkspacesTags($tagPath)
                 ->getTag()
             ;
@@ -136,30 +137,14 @@ class TagManager
     }
 
     /**
-     * @param array $accounts
-     *
-     * @return array
+     * @return string
      */
-    public function getBreadcrumb(array $accounts)
-    {
-        $breadcrumb = [];
-
-        foreach ($accounts as $account) {
-            if (!$account->selected) {
-                continue;
-            }
-
-            $breadcrumb[] = $account->name;
-
-            foreach ($account->containers as $container) {
-                if (!$container->selected) {
-                    continue;
-                }
-
-                $breadcrumb[] = $container->name;
-            }
+    private function getAccessToken (): string {
+        $authorization = $this->request->headers->get('Authorization');
+        if (!$authorization) {
+            throw new AccessDeniedHttpException('Access denied.');
         }
 
-        return $breadcrumb;
+        return str_replace('Bearer ', '', $authorization);
     }
 }

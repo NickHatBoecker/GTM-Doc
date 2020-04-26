@@ -1,7 +1,5 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-    <div class="container bg-white p-4">
+<template>
+    <b-container class="bg-white p-4">
         <h2 class="mb-4">GTM Tool Privacy Policy and Terms Of Service</h2>
         <h3 class="mt-5">What information do you collect?</h3>
         <p>GTM Doc does not collect any user data.</p>
@@ -30,5 +28,13 @@
 
         <h3 class="mt-5">Contact Us</h3>
         <p>If you have any questions about these Terms, please <a href="mailto:kontakt@nick-hat-boecker.de">contact us</a>.</p>
-    </div>
-{% endblock body %}
+    </b-container>
+</template>
+
+<script>
+export default {
+}
+</script>
+
+<style lang="scss" scoped>
+</style>
