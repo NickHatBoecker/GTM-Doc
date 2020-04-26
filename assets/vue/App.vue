@@ -1,9 +1,9 @@
 <template>
     <div>
         <Header />
-        <Alert />
+        <alert />
         <div class="mt-5">
-            <LoadingSpinner />
+            <loading-spinner />
             <router-view class="mb-5" />
         </div>
     </div>
