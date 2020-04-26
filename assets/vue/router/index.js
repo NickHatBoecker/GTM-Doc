@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 
 import store from '../store/index';
 
+import AccountOverview from "../views/AccountOverview";
 import Auth from "../views/Auth";
 import DataPrivacy from "../views/DataPrivacy";
 import Home from "../views/Home";
@@ -25,13 +26,16 @@ const router = new VueRouter({
             },
         },
         { path: "/authorize/:accessToken", component: Auth, name: "authorize", props: true },
-        { path: "/data-privacy", component: DataPrivacy },
+        { path: "/accounts", component: AccountOverview, name: "accounts" },
+        { path: "/data-privacy", component: DataPrivacy, name: "data-privacy" },
         { path: "/note-section-explanation", component: NoteSectionExplanation },
         { path: "*", redirect: "/" },
     ],
 });
 
 router.beforeEach((to, from, next) => {
+    window.scrollTo(0, 0)
+
     if (typeof to.meta.secured === 'undefined' || !to.meta.secured) {
         next()
         return

@@ -1,0 +1,107 @@
+/**
+ * Colors
+ */
+$stratos: #010038;
+$bay-of-many: #293a80;
+$indigo: #537ec5;
+$carrot-orange: #f39422;
+
+$primary-color: $stratos;
+
+/**
+ * Bootstrap Overrides
+ */
+$theme-colors: (
+    "primary": $primary-color,
+    "secondary": $bay-of-many,
+    "indigo": $indigo,
+    "carrot": $carrot-orange,
+);
+
+@import '../../node_modules/bootstrap/scss/bootstrap';
+@import '../../node_modules/bootstrap-vue/src/index';
+@import '../../node_modules/aos/src/sass/aos';
+@import '../typicons/typicons.min.css';
+
+/**
+ * Spacing units
+ */
+$spacing-unit-zero: 0;
+$spacing-unit-default: 6px;
+
+/**
+ * Font sizes
+ */
+$font-size-default: 16px;
+$font-size-xxs: 13px;
+$font-size-xs: 18px;
+$font-size-sm: 24px;
+$font-size-sm-md: 30px;
+$font-size-md: 34px;
+$font-size-lg: 40px;
+$font-size-xl: 56px;
+
+/**
+ * Font-stack
+ */
+$main-font: "Helvetica";
+$main-font-stack: $main-font, Arial, sans-serif;
+
+.u-size-default { font-size: $font-size-default; }
+.u-size-xxs { font-size: $font-size-xxs; }
+.u-size-xs { font-size: $font-size-xs; }
+.u-size-sm { font-size: $font-size-sm; }
+.u-size-sm-md { font-size: $font-size-sm-md; }
+.u-size-md { font-size: $font-size-md; }
+.u-size-lg { font-size: $font-size-lg; }
+.u-size-xl { font-size: $font-size-xl; }
+
+.u-absolute {
+    position: absolute;
+}
+
+.u-relative {
+    position: relative;
+}
+
+.mt-6 {
+    margin-top: $spacing-unit-default*15;
+}
+
+.mb-6 {
+    margin-bottom: $spacing-unit-default*15;
+}
+
+.text-decoration-underline {
+    text-decoration: underline;
+}
+
+body {
+    background-color: $bay-of-many;
+    background-image: linear-gradient($bay-of-many, $indigo);
+    min-height: 100vh;
+}
+
+.card, .card-header, .btn {
+    border-radius: 0 !important;
+}
+
+@include media-breakpoint-up(lg) {
+    .text-right\@lg {
+        text-align: right !important;
+    }
+
+    .text-left\@lg {
+        text-align: left !important;
+    }
+}
+
+@include media-breakpoint-only(sm) {
+    .card-deck {
+        display: block !important;
+
+        .card {
+            margin-bottom: $spacing-unit-default*3;
+        }
+    }
+}

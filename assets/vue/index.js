@@ -4,8 +4,9 @@ import router from "./router";
 import store from "./store/index";
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import Aos from 'aos/dist/aos';
+
+Aos.init();
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);

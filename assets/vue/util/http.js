@@ -41,7 +41,7 @@ axios.interceptors.response.use(
         if (typeof error.response !== 'undefined' && [401, 403].includes(error.response.status)) {
             // Session expired
             store.dispatch('revokeAccessToken')
-            store.commit('setError', '<strong>Warning:</strong> You are not authorized. Maybe your session expired. Please <a class="alert-link text-decoration-underline" href="/api/connect/google">log in</a>.')
+            store.commit('setError', '<strong>Warning:</strong> You are not authorized. Maybe your session expired. If so, please <a class="alert-link text-decoration-underline" href="#start">authenticate again</a>.')
 
             return
         }

@@ -44,10 +44,9 @@ export default new Vuex.Store({
 
     // store.dispatch
     actions: {
-        async initialiseStore ({ dispatch }) {
+        initialiseStore ({ dispatch }) {
             // see index.js in root
             dispatch('loadAccessToken')
-            await dispatch('loadAccounts')
         },
 
         saveAccessToken ({ commit }, accessToken) {

@@ -5,6 +5,8 @@
         <div class="mt-5">
             <loading-spinner />
             <router-view class="mb-5" :key="$route.fullPath" />
+
+            <p class="pt-5 text-center text-white"><small>Nick Hat Böcker &copy; 2020</small></p>
         </div>
     </div>
 </template>
@@ -21,13 +23,3 @@ export default {
     components: { Alert, Header, LoadingSpinner },
 }
 </script>
-
-<style lang="scss">
-    .text-decoration-underline {
-        text-decoration: underline;
-    }
-
-    .u-borderless {
-        border: none;
-    }
-</style>

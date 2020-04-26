@@ -1,6 +1,6 @@
 <template>
     <b-card
-        class="u-borderless"
+        class="border-0"
         :header="name"
         header-class="font-weight-bold bg-primary text-white"
         :footer="originalName"
@@ -43,7 +43,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .card, .card-header {
         border-radius: 0;
     }

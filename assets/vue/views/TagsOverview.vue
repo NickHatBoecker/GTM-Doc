@@ -1,15 +1,15 @@
 <template>
     <b-container>
-        <div id="top" class="bg-primary text-white p-3 mb-5">
-            <router-link :to="{ name: 'home' }" class="text-white">Home</router-link> ➤
-            <template v-if="currentAccount">{{ currentAccount.name }} ➤</template>
+        <div id="top" class="bg-primary text-white p-3 mb-4">
+            <router-link :to="{ name: 'home' }" class="text-white">Home</router-link> <icon name="chevron-right" />
+            <router-link v-if="currentAccount" :to="{ name: 'accounts' }" class="text-white">{{ currentAccount.name }} <icon name="chevron-right" /></router-link>
             <template v-if="currentContainer">{{ currentContainer.name }}</template>
         </div>
 
         <tag
             v-for="(tag, index) in tags"
             :key="`tag-${index}`"
-            class="mb-5"
+            class="mb-4"
             v-bind="tag"
         />
 
@@ -18,11 +18,12 @@
 </template>
 
 <script>
+import Icon from '../components/base/Icon'
 import Tag from '../components/Tag'
 import TopButton from '../components/TopButton'
 
 export default {
-    components: { Tag, TopButton },
+    components: { Icon, Tag, TopButton },
 
     props: {
         accountId: { type: String, required: true },
