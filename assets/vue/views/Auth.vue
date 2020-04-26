@@ -10,9 +10,8 @@ export default {
 
     mounted () {
         this.$store.dispatch('saveAccessToken', this.accessToken)
-        console.log(this.accessToken)
-
         this.$router.push('/')
+        this.$store.dispatch('loadAccounts')
     },
 }
 </script>

@@ -26,11 +26,11 @@ export default new Vuex.Store({
         },
 
         setAccounts (state, accounts) {
-            Vue.set(state, 'accounts', accounts)
+            state.accounts = accounts
         },
 
         setTags (state, tags) {
-            Vue.set(state, 'tags', tags)
+            state.tags = tags
         },
 
         setError (state, message) {

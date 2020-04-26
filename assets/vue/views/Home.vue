@@ -34,10 +34,6 @@ export default {
         if (this.$route.query.accessToken) {
             this.$router.push({ name: 'authorize', params: { accessToken: this.$route.query.accessToken }})
         }
-
-        if (!this.$store.getters.accounts.length) {
-            this.$store.dispatch('loadAccounts')
-        }
     },
 }
 </script>

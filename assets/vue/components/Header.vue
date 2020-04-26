@@ -17,7 +17,7 @@
                     <template v-if="accounts.length" v-for="(account, index) in accounts">
                         <span :key="`account-${index}`" class="text-white pl-3 pr-3">{{ account.name }}</span>
                         <b-dropdown-item
-                            v-for="(container, containerIndex) in account.containers" :key="`container-${containerIndex}`"
+                            v-for="(container, containerIndex) in account.containers" :key="`account-${index}-container-${containerIndex}`"
                             :to="{ name: 'tags', params: { accountId: account.id, containerId: container.id }}"
                             class="ml-2"
                         >

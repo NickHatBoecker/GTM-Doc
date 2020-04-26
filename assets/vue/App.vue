@@ -4,7 +4,7 @@
         <alert />
         <div class="mt-5">
             <loading-spinner />
-            <router-view class="mb-5" />
+            <router-view class="mb-5" :key="$route.fullPath" />
         </div>
     </div>
 </template>

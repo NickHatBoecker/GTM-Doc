@@ -2,8 +2,8 @@
     <b-container>
         <div id="top" class="bg-primary text-white p-3 mb-5">
             <router-link :to="{ name: 'home' }" class="text-white">Home</router-link> ➤
-            {{ currentAccount.name }} ➤
-            {{ currentContainer.name }}
+            <template v-if="currentAccount">{{ currentAccount.name }} ➤</template>
+            <template v-if="currentContainer">{{ currentContainer.name }}</template>
         </div>
 
         <tag
@@ -36,23 +36,11 @@ export default {
 
 
         currentAccount () {
-            if (typeof this.$store.getters.accounts === 'undefined') {
-                return ''
-            }
-
-            const that = this
-
-            return this.$store.getters.accounts.find(x => x.id = that.accountId)
+            return this.$store.getters.accounts.find(x => x.id === this.accountId)
         },
 
         currentContainer () {
-            if (typeof this.currentAccount.containers === 'undefined') {
-                return ''
-            }
-
-            const that = this
-
-            return this.currentAccount.containers.find(x => x.id = that.containerId)
+            return this.currentAccount.containers.find(x => x.id === this.containerId)
         },
     },
 
