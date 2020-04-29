@@ -76,6 +76,10 @@ $main-font-stack: $main-font, Arial, sans-serif;
     text-decoration: underline;
 }
 
+html, body {
+    overflow-x: hidden;
+}
+
 body {
     background-color: $bay-of-many;
     background-image: linear-gradient($bay-of-many, $indigo);

@@ -1,5 +1,5 @@
 <template>
-    <picture>
+    <picture class="d-block">
         <source :srcset="webpSrc" type="image/webp">
         <source :srcset="fallbackSrc" :type="fallbackMime">
         <img :src="fallbackSrc" :height="height" :width="width" :alt="altText" title="">
