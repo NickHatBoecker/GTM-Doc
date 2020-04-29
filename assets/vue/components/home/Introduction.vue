@@ -13,20 +13,21 @@
             <b-button size="lg" variant="primary" block class="mt-5" href="#start">START</b-button>
 
             <div class="text-white u-size-default my-5 text-center text-left@lg">
-                <p>GTM Doc is a utility created for Google's Tag Manager.<br>This tool is designed, created, managed, and owned by <a href="https://nick-hat-boecker.de/" target="_blank" class="text-carrot">Nick Böcker</a>.</p>
+                <p>GTM Doc is a utility created for Google's Tag Manager.<br>This tool is designed, created, managed, and owned by <a href="https://nick-hat-boecker.de/" target="_blank" class="text-carrot" rel="noreferrer">Nick Böcker</a>.</p>
             </div>
         </div>
         <div class="col-12 col-lg-6 text-center text-right@lg" data-aos="zoom-in" data-aos-duration="1500">
-            <img src="/img/mockup.png" height="auto" width="80%" alt="" title="" />
+            <app-picture webp-src="/img/mockup.webp" fallback-src="/img/mockup.png" width="80%" alt="Screenshot of GTM application. All Tags listed with title, description and event details." />
         </div>
     </div>
 </template>
 
 <script>
 import Icon from "../base/Icon"
+import AppPicture from "../base/Picture"
 
 export default {
-    components: { Icon },
+    components: { Icon, AppPicture },
 
     data () {
         return {

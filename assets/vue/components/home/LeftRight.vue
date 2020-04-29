@@ -10,8 +10,8 @@
                 </router-link>
             </div>
             <div class="col-12 col-md-6 text-center text-white">
-                <img src="/img/security.png" width="70%" height="auto" alt="" title="">
-                <p class="font-italic u-size-xxs u-opacity-50 mt-2">&copy; Design vector created by freepik - <a href="https://www.freepik.com/free-photos-vectors/design" target="_blank" class="text-white u-underlined">www.freepik.com</a></p>
+                <app-picture webp-src="/img/security.webp" fallback-src="/img/security.png" width="70%" alt="" />
+                <p class="font-italic u-size-xxs u-opacity-50 mt-2">&copy; Design vector created by freepik - <a href="https://www.freepik.com/free-photos-vectors/design" target="_blank" class="text-white u-underlined" rel="noreferrer">www.freepik.com</a></p>
             </div>
         </div>
 
@@ -19,14 +19,14 @@
             <div class="col-12 col-md-6 order-md-7">
                 <h2 class="text-white u-size-md mb-4"><icon name="social-github" class="u-size-lg" /> Open Source</h2>
                 <p class="text-white u-size-xs mb-4">You like open software? I do! If you have any trouble, if you find a bug or want to contribute – feel free to get in touch on GitHub.</p>
-                <a href="https://github.com/NickHatBoecker/GTM-Doc" target="_blank" class="text-carrot u-strong u-size-xs d-block mb-5">
+                <a href="https://github.com/NickHatBoecker/GTM-Doc" target="_blank" class="text-carrot u-strong u-size-xs d-block mb-5" rel="noreferrer">
                     <icon name="arrow-right-thick" />
                     Check out the GitHub Repository
                 </a>
             </div>
             <div class="col-12 col-md-6 order-md-1 text-white">
-                <img src="/img/opensource.png" width="90%" height="auto" alt="" title="">
-                <p class="font-italic u-size-xxs u-opacity-50 mt-2">&copy; Design vector created by freepik - <a href="https://www.freepik.com/free-photos-vectors/design" target="_blank" class="text-white u-underlined">www.freepik.com</a></p>
+                <app-picture webp-src="/img/opensource.webp" fallback-src="/img/opensource.png" width="90%" alt="" />
+                <p class="font-italic u-size-xxs u-opacity-50 mt-2">&copy; Design vector created by freepik - <a href="https://www.freepik.com/free-photos-vectors/design" target="_blank" class="text-white u-underlined" rel="noreferrer">www.freepik.com</a></p>
             </div>
         </div>
     </div>
@@ -34,10 +34,11 @@
 
 <script>
 import Icon from "~/components/base/Icon";
+import AppPicture from "~/components/base/Picture";
 
 
 export default {
-    components: { Icon },
+    components: { Icon, AppPicture },
 }
 </script>
 
