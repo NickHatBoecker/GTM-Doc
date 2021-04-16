@@ -60,6 +60,8 @@ class TagManager
                 );
             }
 
+            usort($accounts, [$this, 'sortByName']);
+
             return $accounts;
         } catch (\Google_Service_Exception $e) {
             $error = $e->getErrors()[0];
@@ -93,6 +95,8 @@ class TagManager
                     $container->getContainerId() == $currentContainerId
                 );
             }
+
+            usort($containers, [$this, 'sortByName']);
 
             return $containers;
         } catch (\Exception $e) {
@@ -139,12 +143,22 @@ class TagManager
     /**
      * @return string
      */
-    private function getAccessToken (): string {
+    private function getAccessToken(): string
+    {
         $authorization = $this->request->headers->get('Authorization');
         if (!$authorization) {
             throw new AccessDeniedHttpException('Access denied.');
         }
 
         return str_replace('Bearer ', '', $authorization);
+    }
+
+    /**
+     * @param $a
+     * @param $b
+     */
+    private function sortByName($a, $b)
+    {
+        return strcasecmp($a->name, $b->name);
     }
 }
