@@ -1,6 +1,6 @@
 <template>
-    <b-container class="bg-primary text-white p-4">
-        <h2 class="mb-4 text-white pb-3 headline">GTM Tool Privacy Policy and Terms Of Service</h2>
+    <b-container class="bg-primary text-white p-4 u-size-xs">
+        <h2 class="mb-4 pb-3 headline">GTM Tool Privacy Policy and Terms Of Service</h2>
 
         <h3 class="mt-5 text-carrot">What information do you collect?</h3>
         <p>GTM Doc does not collect any user data.</p>

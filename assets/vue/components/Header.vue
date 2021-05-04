@@ -11,6 +11,7 @@
         <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav class="mr-auto">
                 <b-nav-item v-if="$store.getters.isAuthenticated" :to="{ name: 'accounts' }">Choose container</b-nav-item>
+                <b-nav-item :to="{ name: 'howto' }">How to</b-nav-item>
                 <b-nav-item :to="{ name: 'data-privacy' }">Privacy Policy</b-nav-item>
             </b-navbar-nav>
             <b-navbar-nav class="ml-auto">

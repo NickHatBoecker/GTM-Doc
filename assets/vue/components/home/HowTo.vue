@@ -18,22 +18,46 @@
                     </p>
                     <h3 class="mb-4 h4">{{ item.title }}</h3>
                     <span class="u-size-xs text-justify">{{ item.text }}</span>
+                    <router-link v-if="item.link" class="c-link text-carrot" :to="item.link.to">
+                        <icon class="c-icon u-size-sm-md mr-1" name="arrow-right" />
+                        {{ item.link.text }}
+                    </router-link>
                 </b-card-text>
             </b-card>
         </b-card-group>
-
-        <b-button href="#start" variant="primary" block size="lg" class="pt-3 pb-3 text-carrot">Try It Now</b-button>
     </div>
 </template>
 
 <script>
+import Icon from "../base/Icon"
+
 export default {
+    components: { Icon },
+
     data () {
         return {
             items: [
-                { dateline: 'Step 1', title: 'Log in via Google', text: 'Authorize with your google account and accept the required permissions.' },
-                { dateline: 'Step 2', title: 'Choose your container', text: 'From the accounts list, choose the container you want to inspect.' },
-                { dateline: 'Step 3', title: 'Add information', text: 'Add custom titles and description to tags and view them in the app.' },
+                {
+                    dateline: 'Step 1',
+                    title: 'Log in via Google',
+                    text: 'Authorize with your google account and accept the required permissions.',
+                    link: null,
+                },
+                {
+                    dateline: 'Step 2',
+                    title: 'Choose your container',
+                    text: 'From the accounts list, choose the container you want to inspect.',
+                    link: null,
+                },
+                {
+                    dateline: 'Step 3',
+                    title: 'Add information',
+                    text: 'Add custom titles and description to tags and view them in the app.',
+                    link: {
+                        to: { name: 'howto' },
+                        text: 'Check out how',
+                    },
+                },
             ],
         }
     },
@@ -52,5 +76,14 @@ export default {
 
     .c-dateline {
         color: lighten(#293a80, 40%);
+    }
+
+    .c-link {
+        display: block;
+    }
+
+    .c-icon {
+        position: relative;
+        top: 4px;
     }
 </style>

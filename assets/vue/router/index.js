@@ -28,7 +28,7 @@ const router = new VueRouter({
         { path: "/authorize/:accessToken", component: Auth, name: "authorize", props: true },
         { path: "/accounts", component: AccountOverview, name: "accounts" },
         { path: "/data-privacy", component: DataPrivacy, name: "data-privacy" },
-        { path: "/note-section-explanation", component: NoteSectionExplanation },
+        { name: 'howto', path: "/note-section-explanation", component: NoteSectionExplanation },
         { path: "*", redirect: "/" },
     ],
 });

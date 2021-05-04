@@ -4,7 +4,7 @@
 $stratos: #010038;
 $bay-of-many: #293a80;
 $indigo: #537ec5;
-$carrot-orange: #f39422;
+$carrot-orange: #ffdb26; /* #ffd500; */
 
 $primary-color: $stratos;
 
@@ -88,6 +88,18 @@ body {
 
 .card, .card-header, .btn {
     border-radius: 0 !important;
+}
+
+a.text-carrot:hover,
+a.text-carrot:active,
+a.text-carrot:focus {
+    color: lighten($carrot-orange, 10%) !important;
+}
+
+.btn.btn-primary:hover,
+.btn.btn-primary:active,
+.btn.btn-primary:focus {
+    outline: 2px solid #ffdb26;
 }
 
 @include media-breakpoint-up(lg) {
