@@ -6,6 +6,15 @@
             <template v-if="currentContainer">{{ currentContainer.name }}</template>
         </div>
 
+        <div class="mb-4">
+            <input
+                v-model="searchTerm"
+                type="text"
+                class="form-control search"
+                placeholder="Search..."
+            />
+        </div>
+
         <tag
             v-for="(tag, index) in tags"
             :key="`tag-${index}`"
@@ -30,11 +39,26 @@ export default {
         containerId: { type: String, required: true },
     },
 
+    data: () => ({ searchTerm: null }),
+
     computed: {
         tags () {
-            return this.$store.getters.tags
-        },
+            const tags = this.$store.getters.tags
+            if (!this.searchTerm) {
+                return tags
+            }
 
+            return tags.filter(tag => {
+                return !! (
+                    tag.name && tag.name.includes(this.searchTerm) ||
+                    tag.originalName && tag.originalName.includes(this.searchTerm) ||
+                    tag.description && tag.description.includes(this.searchTerm) ||
+                    tag.eventCategory && tag.eventCategory.includes(this.searchTerm) ||
+                    tag.eventAction && tag.eventAction.includes(this.searchTerm) ||
+                    tag.eventLabel && tag.eventLabel.includes(this.searchTerm)
+                )
+            })
+        },
 
         currentAccount () {
             return this.$store.getters.accounts.find(x => x.id === this.accountId)
@@ -54,3 +78,9 @@ export default {
     },
 }
 </script>
+
+<style lang="scss" scoped>
+    .search {
+        border-radius: 0;
+    }
+</style>
