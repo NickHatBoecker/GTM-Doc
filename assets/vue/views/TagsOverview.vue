@@ -48,14 +48,16 @@ export default {
                 return tags
             }
 
+            const searchTerm = this.searchTerm.toLowerCase()
+
             return tags.filter(tag => {
                 return !! (
-                    tag.name && tag.name.includes(this.searchTerm) ||
-                    tag.originalName && tag.originalName.includes(this.searchTerm) ||
-                    tag.description && tag.description.includes(this.searchTerm) ||
-                    tag.eventCategory && tag.eventCategory.includes(this.searchTerm) ||
-                    tag.eventAction && tag.eventAction.includes(this.searchTerm) ||
-                    tag.eventLabel && tag.eventLabel.includes(this.searchTerm)
+                    tag.name && tag.name.toLowerCase().includes(searchTerm) ||
+                    tag.originalName && tag.originalName.toLowerCase().includes(searchTerm) ||
+                    tag.description && tag.description.includes(searchTerm) ||
+                    tag.eventCategory && tag.eventCategory.toLowerCase().includes(searchTerm) ||
+                    tag.eventAction && tag.eventAction.toLowerCase().includes(searchTerm) ||
+                    tag.eventLabel && tag.eventLabel.toLowerCase().includes(searchTerm)
                 )
             })
         },
