@@ -12,24 +12,9 @@ services:
     depends_on:
     - gtm_doc_php
 
-  gtm_doc_mysql:
-    image: mariadb:10.6.4-focal
-    container_name: gtm_doc_mysql
-    volumes:
-    - ./data/db:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: gtm_doc
-      MYSQL_USER: gtm_doc
-      MYSQL_PASSWORD: gtm_doc
-    ports:
-      - "33880:3306"
-
   gtm_doc_php:
     build: ./php
     container_name: gtm_doc_php
     volumes:
     - ../:/home/wwwroot:cached
     - ~/.ssh:/root/.ssh:ro
-    depends_on:
-    - gtm_doc_mysql
