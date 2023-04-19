@@ -2,7 +2,7 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^7.2.5",
+        "php": "~8.1.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "google/apiclient": "^2.0",
