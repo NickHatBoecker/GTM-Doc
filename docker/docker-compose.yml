@@ -1,0 +1,35 @@
+version: '3.5'
+
+services:
+  gtm_doc_apache:
+    build: ./apache
+    container_name: gtm_doc_apache
+    ports:
+    - 7800:80
+    volumes:
+    - ../:/home/wwwroot/
+    - ./config/vhosts:/etc/apache2/sites-enabled
+    depends_on:
+    - gtm_doc_php
+
+  gtm_doc_mysql:
+    image: mariadb:10.6.4-focal
+    container_name: gtm_doc_mysql
+    volumes:
+    - ./data/db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: gtm_doc
+      MYSQL_USER: gtm_doc
+      MYSQL_PASSWORD: gtm_doc
+    ports:
+      - "33880:3306"
+
+  gtm_doc_php:
+    build: ./php
+    container_name: gtm_doc_php
+    volumes:
+    - ../:/home/wwwroot:cached
+    - ~/.ssh:/root/.ssh:ro
+    depends_on:
+    - gtm_doc_mysql
