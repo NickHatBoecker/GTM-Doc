@@ -19,11 +19,14 @@ Wanna try? [Check it out!](https://gtm.nick-hat-boecker.de)
 ## Technologies / Tools
 
 - Backend
+  - PHP 8.1
   - Symfony (PHP Framework, Backend)
   - Google PHP Client (Tag Manager API)
   - KnpUniversity oAuth2 Client Bundle (google login)
   
 - Frontend
+  - Node12
+  - yarn
   - Vue.js (JS Framework)
   - Bootstrap Vue
   - AOS (animations)
@@ -37,7 +40,23 @@ $ composer install
 ```
 
 - Create a file called `.env.local`, put your `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` in it and save.
-- After this, use `yarn dev` to watch all files in dev mode or  `yarn build` for production mode.
+- Run `yarn`
+- After this, use `yarn dev` to watch all files in dev mode or `yarn build` for production mode.
+
+### With docker
+
+```
+$ git clone https://github.com/NickHatBoecker/GTM-Doc.git gtm-doc
+$ cd gtm-doc/docker
+$ ./docker-start.sh       # Start docker container
+$ ./docker-login.sh php   # Log into docker shell
+$ composer install
+$ yarn
+```
+
+After this, use `yarn dev` to watch all files in dev mode or `yarn build` for production mode (not working in docker yet).
+
+You can access the page via http://localhost:7800/
 
 ## Contributions
 
