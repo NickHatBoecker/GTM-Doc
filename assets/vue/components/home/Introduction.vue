@@ -13,7 +13,7 @@
             <b-button size="lg" variant="primary" block class="mt-5" href="/api/connect/google">Start now</b-button>
 
             <div class="text-white u-size-default my-5 text-center text-left@lg">
-                <p>GTM Doc is a utility created for Google's Tag Manager.<br>This tool is designed, created, managed, and owned by <a href="https://nick-hat-boecker.de/" target="_blank" class="text-carrot" rel="noreferrer">Nick Böcker</a>.</p>
+                <p>GTM Doc is a utility created for Google's Tag Manager.<br>This tool is designed, created, managed, and owned by <a href="https://nickhatboecker.de/" target="_blank" class="text-carrot" rel="noreferrer">Nick Böcker</a>.</p>
                 <p>Please read the <router-link :to="{ name: 'data-privacy' }" class="text-carrot">Privacy Policy and Terms of Service</router-link>.</p>
             </div>
         </div>

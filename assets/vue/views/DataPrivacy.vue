@@ -28,7 +28,7 @@
         <p>By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, please stop using the Service.</p>
 
         <h3 class="mt-5 text-carrot">Contact Us</h3>
-        <p>If you have any questions about these Terms, please <a href="mailto:kontakt@nick-hat-boecker.de" class="text-carrot">contact us</a>.</p>
+        <p>If you have any questions about these Terms, please <a href="mailto:contact@nickhatboecker.de" class="text-carrot">contact us</a>.</p>
     </b-container>
 </template>
 
